@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!----------------打印1------------------->
+
+<input id="btnPrint" type="button" value="打印" onclick="javascript:window.print();" />
+
+<!--将不需要打印的部分，标记为 class="noprint" -->
+<style type="text/css" media=print>
+    .noprint{display : none }
+</style>
+
+<p class="noprint">不需要打印的地方</p>
+
+<p>打印的部分</p>
+
+
+<!-----------------打印1end----------------->
+
+
+
+<!----------------打印2------------------->
+
+<input id="btnPrint" type="button" value="打印预览" onclick=preview(1) />
+<script>
+    function preview(oper)
+    {
+        if (oper < 10)
+        {
+            bdhtml=window.document.body.innerHTML;//获取当前页的html代码
+            sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域
+            eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域
+            prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
+            prnhtmlprnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+            window.document.body.innerHTML=prnhtml;
+            window.print();
+            window.document.body.innerHTML=bdhtml;
+        } else {
+            window.print();
+        }
+    }
+</script>
+
+<p>XXXXX</p>
+
+<!--startprint1-->要打印的内容<!--endprint1-->
+
+下面都是要打印的内容
+奥术大师大所多
+
+<!-----------------打印2end----------------->
+</body>
+</html>
